@@ -62,8 +62,8 @@ function CreateTest(props) {
   const { classes } = props;
   const [testName,setTestName] = useState('');
   const [testDescription,setTestDescription] = useState('');
-  const [testDate,setTestDate] = useState(null);
-  const [testTime,setTestTime] = useState(null);
+  const [testDate,setTestDate] = useState('');
+  const [testTime,setTestTime] = useState('');
 
   return (
     <main className={classes.main}>

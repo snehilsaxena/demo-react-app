@@ -45,32 +45,6 @@ const styles = theme => ({
     }
 });
 
-const handleClickOpen = () => {
-    setShowCompOutside(false);
-    setOpenOutside(true);
-};
-
-const handleClose = () => {
-    setShowCompOutside(false);
-    setOpenOutside(false);
-};
-
-const onClick = (event) => {
-    setShowCompOutside(true);
-};
-
-const onHide = (event) => {
-    setShowCompOutside(false);
-    setOpenOutside(false);
-}
-
-const handleCloseforSnackbar = (event, reason) => {
-    setOpenOutside(false);
-}
-
-let setOpenOutside;
-let setShowCompOutside;
-
 const testData = [
     {
         testName: 'Test - 1',
@@ -89,8 +63,28 @@ const Tests = (props) => {
     const [open, setOpen] = useState(false);
     const [showComp, setShowComp] = useState(false);
 
-    setOpenOutside = setOpen;
-    setShowCompOutside = setShowComp;
+    const handleClickOpen = () => {
+        setShowComp(false);
+        setOpen(true);
+    };
+
+    const handleClose = () => {
+        setShowComp(false);
+        setOpen(false);
+    };
+
+    const onClick = (event) => {
+        setShowComp(true);
+    };
+
+    const onHide = (event) => {
+        setShowComp(false);
+        setOpen(false);
+    }
+
+    const handleCloseforSnackbar = (event, reason) => {
+        setOpen(false);
+    }
 
     let tests = [];
     testData.forEach((element) => {
@@ -157,7 +151,7 @@ const Tests = (props) => {
     })
 
     return (
-        <div> 
+        <div>
             <br />
             <Grid container spacing={10} alignItems="center" justify="center" direction="row">
                 {tests}

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { BrowserRouter as Router, Route, Switch, Redirect } from "react-router-dom"
+import { BrowserRouter as Router, Route, Switch, Redirect, Link } from "react-router-dom";
 import CreateTest from './CreateTest/CreateTest';
 import AddQuestions from './CreateTest/AddQuestions';
 import Tests from './Tests/Tests';
@@ -10,7 +10,6 @@ import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
-import Link from '@material-ui/core/Link';
 
 const styles = theme => ({
   link: {
@@ -33,7 +32,6 @@ class App extends Component {
   render() {
     const { classes } = this.props
     const createTest = "/createTest"
-    const addQuestions = "/addQuestions"
     const tests = "/tests"
     return (
       <React.Fragment>
@@ -41,25 +39,18 @@ class App extends Component {
           <React.Fragment>
             <AppBar position="static">
               <Toolbar>
-                <Grid justify="space-between" container spacing={10}>
+                <Grid justify="flex-end" container spacing={10}>
                   <Grid item>
                     <Typography variant="h6" gutterBottom  >
-                      <Link href={tests} className={classes.active} >
+                      <Link to={tests} className={classes.active} style={{ textDecoration: 'none' }} >
                         Tests
                       </Link>
                     </Typography>
                   </Grid>
                   <Grid item>
                     <Typography variant="h6" gutterBottom  >
-                      <Link href={createTest} className={classes.active} >
-                        Create Test !
-                      </Link>
-                    </Typography>
-                  </Grid>
-                  <Grid item>
-                    <Typography variant="h6" gutterBottom  >
-                      <Link href={addQuestions} className={classes.active} >
-                        Add Questions !
+                      <Link to={createTest} className={classes.active} style={{ textDecoration: 'none' }} >
+                        Create Test
                       </Link>
                     </Typography>
                   </Grid>

@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
+import { BrowserRouter as Router, Route, Switch, Redirect, Link } from "react-router-dom";
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import Card from '@material-ui/core/Card';
-import CardMedia from '@material-ui/core/CardMedia';
 import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
 import red from '@material-ui/core/colors/red';
@@ -14,10 +14,11 @@ import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import Snackbar from '@material-ui/core/Snackbar';
+import testData from "../../utils/testData";
 
 const styles = theme => ({
     card: {
-        maxWidth: 400,
+        maxWidth: 250,
     },
     media: {
         height: 0,
@@ -44,19 +45,6 @@ const styles = theme => ({
         size: '20px'
     }
 });
-
-const testData = [
-    {
-        testName: 'Test - 1',
-        testDate: '15-12-2020',
-        testDescription: 'This test is for 1st set of users'
-    },
-    {
-        testName: 'Test - 2',
-        testDate: '22-12-2020',
-        testDescription: 'This test is for 2nd set of users'
-    }
-]
 
 const Tests = (props) => {
     const { classes } = props;
@@ -86,26 +74,28 @@ const Tests = (props) => {
         setOpen(false);
     }
 
+    const editTestButton = <Link to="/addQuestions" style={{ textDecoration: 'none' }}><Button variant="outlined" color="primary"> Edit </Button></Link>;
+    const registerTestButton = <Button variant="contained" color="primary"> Register </Button>
+
     let tests = [];
     testData.forEach((element) => {
         let data = (
             <React.Fragment key={element.testName} >
                 <Grid item sm={4}>
                     <Card className={classes.card}>
-                        <CardMedia
-                            className={classes.media}
-                            title={element.testName}
-                        />
                         <CardContent>
                             <Typography gutterBottom variant="h5" component="h2">
                                 {element.testName}
                             </Typography>
-                            {element.testDate}
-                            <br />
-                            <br />
-                            <Button variant="contained" color="primary" onClick={handleClickOpen}>
+                            {element.testDate} , {element.testTime}
+                            {/* <Button variant="outlined" color="primary" onClick={handleClickOpen}>
                                 Test Description
-                            </Button>
+                            </Button> */}
+                            <br />
+                            <br />
+                            <Grid container justify="space-between">
+                                {registerTestButton} {editTestButton}
+                            </Grid>
                             <Dialog
                                 open={open}
                                 onClose={handleClose}
@@ -151,9 +141,9 @@ const Tests = (props) => {
     })
 
     return (
-        <div>
+        <div style={{ padding: '20px' }}>
             <br />
-            <Grid container spacing={10} alignItems="center" justify="center" direction="row">
+            <Grid container spacing={10} alignItems="flex-start" justify="flex-start" direction="row">
                 {tests}
             </Grid>
         </div>

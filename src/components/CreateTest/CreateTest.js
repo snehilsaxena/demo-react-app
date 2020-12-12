@@ -9,6 +9,7 @@ import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 import { TextField } from '@material-ui/core';
 import withStyles from '@material-ui/core/styles/withStyles';
+import testData from "../../utils/testData";
 
 const styles = theme => ({
   main: {
@@ -60,13 +61,26 @@ const styles = theme => ({
 
 function CreateTest(props) {
   const { classes } = props;
-  const [testName,setTestName] = useState('');
-  const [testDescription,setTestDescription] = useState('');
-  const [testDate,setTestDate] = useState('');
-  const [testTime,setTestTime] = useState('');
+  const [testName, setTestName] = useState('');
+  const [testDescription, setTestDescription] = useState('');
+  const [testDate, setTestDate] = useState('');
+  const [testTime, setTestTime] = useState('');
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    testData.push(
+      {
+        testName: testName,
+        testDate: testDate,
+        testTime: testTime,
+        testDescription: testDescription
+      }
+    );
+    props.history.push('/tests');
+  };
 
   return (
-    <main className={classes.main}>
+    <main className={classes.main} onSubmit={handleSubmit}>
       <CssBaseline />
       <Paper className={classes.paper}>
         <Typography component="h1" variant="h5">
@@ -76,21 +90,21 @@ function CreateTest(props) {
 
           <FormControl margin="normal" required fullWidth>
             <InputLabel htmlFor="testName" >Test Name</InputLabel>
-            <Input id="testName" name="testName" value={testName} onChange={(event)=>{setTestName(event.target.value)}}
+            <Input id="testName" name="testName" value={testName} onChange={(event) => { setTestName(event.target.value) }}
               autoFocus
             />
           </FormControl>
           <FormControl margin="normal" required fullWidth>
             <InputLabel htmlFor="testDescription" >Test Description</InputLabel>
-            <Input id="testDescription" name="testDescription" value={testDescription} onChange={(event)=>{setTestDescription(event.target.value)}} />
+            <Input id="testDescription" name="testDescription" value={testDescription} onChange={(event) => { setTestDescription(event.target.value) }} />
           </FormControl>
           <FormControl margin="normal" required fullWidth>
-            <TextField id="testDate" label="Test Date*" type="date" value={testDate} onChange={(event)=>{setTestDate(event.target.value)}}
+            <TextField id="testDate" label="Test Date*" type="date" value={testDate} onChange={(event) => { setTestDate(event.target.value) }}
               InputLabelProps={{ shrink: true, }}
             ></TextField>
           </FormControl>
           <FormControl margin="normal" required fullWidth>
-            <TextField id="testTime" label="Test Time*" type="time" value={testTime} onChange={(event)=>{setTestTime(event.target.value)}}
+            <TextField id="testTime" label="Test Time*" type="time" value={testTime} onChange={(event) => { setTestTime(event.target.value) }}
               InputLabelProps={{ shrink: true, }}
             ></TextField>
           </FormControl>
@@ -130,10 +144,6 @@ function CreateTest(props) {
             Create
           </Button>
         </form>
-        {testName}
-        {testDescription}
-        {testDate}
-        {testTime}
       </Paper>
     </main>
   )
